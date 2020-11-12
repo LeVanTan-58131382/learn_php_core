@@ -58,3 +58,28 @@ $timTenDongVat = function() {
 $dongvat = new DongVat('Vua Sư Tử!');
 
 $timTenDongVat->call($dongvat); // Shows "Vua Sư Tử!"
+
+// Using biến bên ngoài
+$quantity = 2;
+
+$calculator = function($number) use ($quantity) {
+    return $number * $quantity;
+};
+
+echo $calculator(5);
+
+// Ở trên là dùng một biến quantity tĩnh
+// Ta có thể tạo một closure dynamic để tùy chỉnh tham số $quantity trên
+
+function createCalculator($quantity) {
+    return function($number) use ($quantity) {
+        return $number * $quantity;
+    };
+}
+
+$calculator_1 = createCalculator(1);
+$calculator_2 = createCalculator(2);
+
+echo $calculator_1(2); // 2 * 1 = 2
+echo $calculator_2(2); // 2 * 2 = 4
+
